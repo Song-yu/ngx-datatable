@@ -22,7 +22,9 @@ import {
   DatatableRowDetailTemplateDirective,
   DataTableFooterTemplateDirective,
   DatatableFooterDirective,
-  DatatableGroupHeaderTemplateDirective
+  DatatableGroupHeaderTemplateDirective,
+  DataTableSummaryRowComponent,
+  DataTableSummaryRowCellComponent
 } from './components';
 
 import {
@@ -72,7 +74,9 @@ import {
     DataTableColumnHeaderDirective,
     DataTableColumnCellDirective,
     DatatableFooterDirective,
-    DatatableGroupHeaderTemplateDirective
+    DatatableGroupHeaderTemplateDirective,
+    DataTableSummaryRowComponent,
+    DataTableSummaryRowCellComponent
   ],
   exports: [
     DatatableComponent,

@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import {Component, ViewEncapsulation} from '@angular/core';
+import {Location, LocationStrategy, HashLocationStrategy} from '@angular/common';
 
 @Component({
   selector: 'app',
@@ -18,7 +18,9 @@ import { Location, LocationStrategy, HashLocationStrategy } from '@angular/commo
   template: `
     <div [class.dark]="state === 'dark'">
       <nav>
-        <h3>ngx-datatable <small>({{version}})</small></h3>
+        <h3>ngx-datatable
+          <small>({{version}})</small>
+        </h3>
         <ul class="main-ul">
           <li>
             <h4>Documentation</h4>
@@ -46,6 +48,7 @@ import { Location, LocationStrategy, HashLocationStrategy } from '@angular/commo
               <li><a href="#contextmenu" (click)="state='contextmenu'">Context Menu</a></li>
               <li><a href="#css" (click)="state='css'">CSS Classes</a></li>
               <li><a href="#footer" (click)="state='footer'">Footer Template</a></li>
+              <li><a href="#summary" (click)="state='summary-row'">Summary Row</a></li>
             </ul>
           </li>
           <li>
@@ -58,7 +61,7 @@ import { Location, LocationStrategy, HashLocationStrategy } from '@angular/commo
           <li>
             <h4>Rows</h4>
             <ul>
-              <li><a href="#row-grouping" (click)="state='row-grouping'">Row Grouping</a></li>            
+              <li><a href="#row-grouping" (click)="state='row-grouping'">Row Grouping</a></li>
               <li><a href="#" (click)="state=''">Fluid Row Height</a></li>
               <li><a href="#basic-fixed" (click)="state='basic-fixed'">Fixed Row Height</a></li>
               <li><a href="#dynamic" (click)="state='dynamic'">Dynamic Row Height</a></li>
@@ -93,7 +96,8 @@ import { Location, LocationStrategy, HashLocationStrategy } from '@angular/commo
               <li><a href="#multi-click-selection" (click)="state='multi-click-selection'">Multi Click Row</a></li>
               <li><a href="#multidisable-selection" (click)="state='multidisable-selection'">Disable Callback</a></li>
               <li><a href="#chkbox-selection" (click)="state='chkbox-selection'">Checkbox</a></li>
-              <li><a href="#chkbox-selection-template" (click)="state='chkbox-selection-template'">Custom Checkbox</a></li>
+              <li><a href="#chkbox-selection-template" (click)="state='chkbox-selection-template'">Custom Checkbox</a>
+              </li>
             </ul>
           </li>
           <li>
@@ -134,10 +138,11 @@ import { Location, LocationStrategy, HashLocationStrategy } from '@angular/commo
         <row-css-demo *ngIf="state === 'css'"></row-css-demo>
         <dynamic-height-demo *ngIf="state === 'dynamic'"></dynamic-height-demo>
         <footer-demo *ngIf="state === 'footer'"></footer-demo>
+        <summary-row-demo *ngIf="state === 'summary-row'"></summary-row-demo>
 
         <!-- Themes -->
         <basic-dark-theme-demo *ngIf="state === 'dark'"></basic-dark-theme-demo>
-        <basic-bootstrap-theme-demo  *ngIf="state === 'bootstrap'"></basic-bootstrap-theme-demo>
+        <basic-bootstrap-theme-demo *ngIf="state === 'bootstrap'"></basic-bootstrap-theme-demo>
 
         <!-- Paging -->
         <row-grouping-demo *ngIf="state === 'row-grouping'"></row-grouping-demo>

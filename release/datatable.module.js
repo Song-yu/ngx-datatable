@@ -49,7 +49,9 @@ var NgxDatatableModule = /** @class */ (function () {
                 components_1.DataTableColumnHeaderDirective,
                 components_1.DataTableColumnCellDirective,
                 components_1.DatatableFooterDirective,
-                components_1.DatatableGroupHeaderTemplateDirective
+                components_1.DatatableGroupHeaderTemplateDirective,
+                components_1.DataTableSummaryRowComponent,
+                components_1.DataTableSummaryRowCellComponent
             ],
             exports: [
                 components_1.DatatableComponent,

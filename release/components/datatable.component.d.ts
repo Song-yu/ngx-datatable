@@ -20,6 +20,20 @@ export declare class DatatableComponent implements OnInit, DoCheck, AfterViewIni
      */
     rows: any;
     /**
+     * Gets the summary row
+     *
+     * @readonly
+     * @type {*}
+     * @memberOf DatatableComponent
+     */
+    /**
+     * Set the summary row
+     *
+     * @param val
+     * @memberOf DatatableComponent
+     */
+    summaryRow: any;
+    /**
      * This attribute allows the user to set the name of the column to group the data with
      */
     groupRowsBy: string;
@@ -212,6 +226,13 @@ export declare class DatatableComponent implements OnInit, DoCheck, AfterViewIni
      */
     virtualization: boolean;
     /**
+     * The summary row height
+     *
+     * @type {number}
+     * @memberOf DatatableComponent
+     */
+    summaryRowHeight: number;
+    /**
      * Body was scrolled typically in a `scrollbarV:true` scenario.
      */
     scroll: EventEmitter<any>;
@@ -341,6 +362,7 @@ export declare class DatatableComponent implements OnInit, DoCheck, AfterViewIni
     _count: number;
     _offset: number;
     _rows: any[];
+    _summaryRow: any;
     _groupRowsBy: string;
     _internalRows: any[];
     _internalColumns: TableColumn[];

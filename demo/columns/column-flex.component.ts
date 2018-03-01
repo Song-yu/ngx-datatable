@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'column-flex-demo',
@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
       <h3>
         Flex Column Width Distribution
         <small>
-          <a href="https://github.com/swimlane/ngx-datatable/blob/master/demo/columns/column-flex.component.ts" target="_blank">
+          <a href="https://github.com/swimlane/ngx-datatable/blob/master/demo/columns/column-flex.component.ts"
+             target="_blank">
             Source
           </a>
         </small>

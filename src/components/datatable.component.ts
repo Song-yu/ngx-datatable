@@ -82,6 +82,15 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
         (select)="onBodySelect($event)"
         (scroll)="onBodyScroll($event)">
       </datatable-body>
+      <datatable-summary-row
+        *ngIf="summaryRow"
+        [row]="summaryRow"
+        [columns]="_internalColumns"
+        [scrollbarH]="scrollbarH"
+        [innerWidth]="_innerWidth"
+        [offsetX]="_offsetX | async"
+        [rowHeight]="summaryRowHeight">
+      </datatable-summary-row>
       <datatable-footer
         *ngIf="footerHeight"
         [rowCount]="rowCount"
@@ -140,6 +149,27 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
    */
   get rows(): any {
     return this._rows;
+  }
+
+  /**
+   * Set the summary row
+   *
+   * @param val
+   * @memberOf DatatableComponent
+   */
+  @Input() set summaryRow(val: any) {
+    this._summaryRow = val;
+  }
+
+  /**
+   * Gets the summary row
+   *
+   * @readonly
+   * @type {*}
+   * @memberOf DatatableComponent
+   */
+  get summaryRow(): any {
+    return this._summaryRow;
   }
 
   /**
@@ -429,6 +459,14 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
   @Input() virtualization: boolean = true;
 
   /**
+   * The summary row height
+   *
+   * @type {number}
+   * @memberOf DatatableComponent
+   */
+  @Input() summaryRowHeight: number = 30;
+
+  /**
    * Body was scrolled typically in a `scrollbarV:true` scenario.
    */
   @Output() scroll: EventEmitter<any> = new EventEmitter();
@@ -638,6 +676,7 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
   _count: number = 0;
   _offset: number = 0;
   _rows: any[];
+  _summaryRow: any;
   _groupRowsBy: string;
   _internalRows: any[];
   _internalColumns: TableColumn[];

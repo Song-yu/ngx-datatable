@@ -7,6 +7,7 @@ __export(require("./datatable.component"));
 __export(require("./header"));
 __export(require("./body"));
 __export(require("./footer"));
+__export(require("./summary-row"));
 __export(require("./columns"));
 __export(require("./row-detail"));
 //# sourceMappingURL=index.js.map

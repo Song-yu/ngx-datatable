@@ -23,6 +23,7 @@ import { RowCssComponent } from './basic/css.component';
 import { DynamicHeightComponent } from './basic/dynamic-height.component';
 import { FooterDemoComponent } from './basic/footer.component';
 import { RowGroupingComponent } from './basic/row-grouping.component';
+import { SummaryRowComponent } from './basic/summary-row.component';
 
 // -- Themes
 import { BootstrapThemeComponent } from './basic/bootstrap.component';
@@ -104,7 +105,8 @@ import { ColumnPinningComponent } from './columns/pinning.component';
     DynamicHeightComponent,
     FooterDemoComponent,
     RowGroupingComponent,
-    BootstrapThemeComponent
+    BootstrapThemeComponent,
+    SummaryRowComponent
   ],
   imports: [BrowserModule, NgxDatatableModule],
   bootstrap: [AppComponent]

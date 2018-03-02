@@ -20,7 +20,6 @@ var DataTableSummaryRowComponent = /** @class */ (function () {
             return this._row;
         },
         set: function (val) {
-            console.log('Incoming Summary Row', val);
             this._row = val;
         },
         enumerable: true,
@@ -28,11 +27,9 @@ var DataTableSummaryRowComponent = /** @class */ (function () {
     });
     Object.defineProperty(DataTableSummaryRowComponent.prototype, "columns", {
         get: function () {
-            console.log(this._columns);
             return this._columns;
         },
         set: function (val) {
-            console.log('Incoming Summary Row Columns', val);
             this._columns = val;
             this.recalculateColumns(val);
         },
@@ -93,7 +90,6 @@ var DataTableSummaryRowComponent = /** @class */ (function () {
         return colGroup.type;
     };
     DataTableSummaryRowComponent.prototype.columnTrackingFn = function (index, column) {
-        console.log('Column', column);
         return column.$$id;
     };
     DataTableSummaryRowComponent.prototype.stylesByGroup = function (group) {
@@ -116,7 +112,6 @@ var DataTableSummaryRowComponent = /** @class */ (function () {
         if (val === void 0) { val = this.columns; }
         var colsByPin = utils_1.columnsByPin(val);
         this.columnsByPin = utils_1.columnsByPinArr(val);
-        console.log(this.columnsByPin);
         this.columnGroupWidths = utils_1.columnGroupWidths(colsByPin, val);
     };
     /**

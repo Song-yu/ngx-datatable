@@ -201,7 +201,7 @@
   .ngx-datatable .datatable-summary-row {
     border-top: 1px solid rgba(0, 0, 0, 0.12); }
     .ngx-datatable .datatable-summary-row .datatable-summary-row-cell {
-      padding: 0.75rem; }
+      padding: 0.5rem; }
       .ngx-datatable .datatable-summary-row .datatable-summary-row-cell .datatable-summary-row-cell-label {
         font-weight: bold; }
 

@@ -159,6 +159,11 @@ var DatatableComponent = /** @class */ (function () {
          */
         this.summaryRowHeight = 30;
         /**
+         * without Scroll
+         * @type {boolean}
+         */
+        this.withoutScroll = false;
+        /**
          * Body was scrolled typically in a `scrollbarV:true` scenario.
          */
         this.scroll = new core_1.EventEmitter();
@@ -675,7 +680,9 @@ var DatatableComponent = /** @class */ (function () {
      */
     DatatableComponent.prototype.onBodyScroll = function (event) {
         this._offsetX.next(event.offsetX);
-        this.scroll.emit(event);
+        if (!this.withoutScroll) {
+            this.scroll.emit(event);
+        }
         this.cd.detectChanges();
     };
     /**
@@ -997,6 +1004,10 @@ var DatatableComponent = /** @class */ (function () {
         core_1.Input(),
         __metadata("design:type", Number)
     ], DatatableComponent.prototype, "summaryRowHeight", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], DatatableComponent.prototype, "withoutScroll", void 0);
     __decorate([
         core_1.Output(),
         __metadata("design:type", core_1.EventEmitter)

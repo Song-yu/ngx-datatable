@@ -233,6 +233,11 @@ export declare class DatatableComponent implements OnInit, DoCheck, AfterViewIni
      */
     summaryRowHeight: number;
     /**
+     * without Scroll
+     * @type {boolean}
+     */
+    withoutScroll: boolean;
+    /**
      * Body was scrolled typically in a `scrollbarV:true` scenario.
      */
     scroll: EventEmitter<any>;

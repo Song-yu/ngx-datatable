@@ -30,6 +30,7 @@ var DataTableSummaryRowComponent = /** @class */ (function () {
             return this._columns;
         },
         set: function (val) {
+            console.debug('Incoming Summary Row Columns', val);
             this._columns = val;
             this.recalculateColumns(val);
         },
@@ -180,7 +181,7 @@ var DataTableSummaryRowComponent = /** @class */ (function () {
     DataTableSummaryRowComponent = __decorate([
         core_1.Component({
             selector: 'datatable-summary-row',
-            template: "\n    <div *ngFor=\"let colGroup of columnsByPin; let i = index; trackBy: trackByGroups\"\n         [ngStyle]=\"stylesByGroup(colGroup.type)\">\n      <datatable-summary-row-cell\n        *ngFor=\"let column of colGroup.columns; let ii = index; trackBy: columnTrackingFn\"\n        tabindex=\"-1\"\n        [row]=\"row\"\n        [column]=\"column\"\n        [rowHeight]=\"getRowHeight(rowHeight)\">\n      </datatable-summary-row-cell>\n    </div>\n  ",
+            template: "\n    <div *ngFor=\"let colGroup of columnsByPin; trackBy: trackByGroups\"\n         [ngStyle]=\"stylesByGroup(colGroup.type)\">\n      <datatable-summary-row-cell\n        *ngFor=\"let column of colGroup.columns; trackBy: columnTrackingFn\"\n        tabindex=\"-1\"\n        [row]=\"row\"\n        [column]=\"column\"\n        [rowHeight]=\"getRowHeight(rowHeight)\">\n      </datatable-summary-row-cell>\n    </div>\n  ",
             host: {
                 class: 'datatable-summary-row'
             },

@@ -9,10 +9,10 @@ import {
 @Component({
   selector: 'datatable-summary-row',
   template: `
-    <div *ngFor="let colGroup of columnsByPin; let i = index; trackBy: trackByGroups"
+    <div *ngFor="let colGroup of columnsByPin; trackBy: trackByGroups"
          [ngStyle]="stylesByGroup(colGroup.type)">
       <datatable-summary-row-cell
-        *ngFor="let column of colGroup.columns; let ii = index; trackBy: columnTrackingFn"
+        *ngFor="let column of colGroup.columns; trackBy: columnTrackingFn"
         tabindex="-1"
         [row]="row"
         [column]="column"
@@ -37,6 +37,7 @@ export class DataTableSummaryRowComponent {
   }
 
   @Input() set columns(val: any[]) {
+    console.debug('Incoming Summary Row Columns', val);
     this._columns = val;
     this.recalculateColumns(val);
   }

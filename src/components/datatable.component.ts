@@ -10,16 +10,16 @@ import {
   forceFillColumnWidths, adjustColumnWidths, sortRows,
   setColumnDefaults, throttleable, translateTemplates
 } from '../utils';
-import { ScrollbarHelper, DimensionsHelper } from '../services';
-import { ColumnMode, SortType, SelectionType, TableColumn, ContextmenuType } from '../types';
-import { DataTableBodyComponent } from './body';
-import { DatatableGroupHeaderDirective } from './body/body-group-header.directive';
-import { DataTableColumnDirective } from './columns';
-import { DatatableRowDetailDirective } from './row-detail';
-import { DatatableFooterDirective } from './footer';
-import { DataTableHeaderComponent } from './header';
-import { MouseEvent } from '../events';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {ScrollbarHelper, DimensionsHelper} from '../services';
+import {ColumnMode, SortType, SelectionType, TableColumn, ContextmenuType} from '../types';
+import {DataTableBodyComponent} from './body';
+import {DatatableGroupHeaderDirective} from './body/body-group-header.directive';
+import {DataTableColumnDirective} from './columns';
+import {DatatableRowDetailDirective} from './row-detail';
+import {DatatableFooterDirective} from './footer';
+import {DataTableHeaderComponent} from './header';
+import {MouseEvent} from '../events';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'ngx-datatable',
@@ -127,7 +127,7 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
     if (val) {
       this._internalRows = [...val];
     }
-    
+
     // auto sort on new updates
     if (!this.externalSorting) {
       this._internalRows = sortRows(this._internalRows, this._internalColumns, this.sorts);
@@ -322,6 +322,7 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
   @Input() set offset(val: number) {
     this._offset = val;
   }
+
   get offset(): number {
     return Math.max(Math.min(this._offset, Math.ceil(this.rowCount / this.pageSize) - 1), 0);
   }
@@ -465,6 +466,12 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
    * @memberOf DatatableComponent
    */
   @Input() summaryRowHeight: number = 30;
+
+  /**
+   * without Scroll
+   * @type {boolean}
+   */
+  @Input() withoutScroll: boolean = false;
 
   /**
    * Body was scrolled typically in a `scrollbarV:true` scenario.
@@ -683,12 +690,11 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
   _columns: TableColumn[];
   _columnTemplates: QueryList<DataTableColumnDirective>;
 
-  constructor(
-    @SkipSelf() private scrollbarHelper: ScrollbarHelper,
-    @SkipSelf() private dimensionsHelper: DimensionsHelper,
-    private cd: ChangeDetectorRef,
-    element: ElementRef,
-    differs: KeyValueDiffers) {
+  constructor(@SkipSelf() private scrollbarHelper: ScrollbarHelper,
+              @SkipSelf() private dimensionsHelper: DimensionsHelper,
+              private cd: ChangeDetectorRef,
+              element: ElementRef,
+              differs: KeyValueDiffers) {
 
     // get ref to elm for measuring
     this.element = element.nativeElement;
@@ -720,7 +726,7 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
     if (typeof requestAnimationFrame === 'undefined') {
       return;
     }
-    
+
     requestAnimationFrame(() => {
       this.recalculate();
 
@@ -834,10 +840,9 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
    * Recalulcates the column widths based on column width
    * distribution mode and scrollbar offsets.
    */
-  recalculateColumns(
-    columns: any[] = this._internalColumns,
-    forceIdx: number = -1,
-    allowBleed: boolean = this.scrollbarH): any[] | undefined {
+  recalculateColumns(columns: any[] = this._internalColumns,
+                     forceIdx: number = -1,
+                     allowBleed: boolean = this.scrollbarH): any[] | undefined {
 
     if (!columns) return undefined;
 
@@ -885,7 +890,7 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
   /**
    * Body triggered a page event.
    */
-  onBodyPage({ offset }: any): void {
+  onBodyPage({offset}: any): void {
     this.offset = offset;
 
     this.page.emit({
@@ -901,8 +906,11 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
    */
   onBodyScroll(event: MouseEvent): void {
     this._offsetX.next(event.offsetX);
-    this.scroll.emit(event);
+    if (!this.withoutScroll) {
+      this.scroll.emit(event);
+    }
     this.cd.detectChanges();
+
   }
 
   /**
@@ -973,21 +981,21 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
   /**
    * The header triggered a contextmenu event.
    */
-  onColumnContextmenu({ event, column }: any): void {
-    this.tableContextmenu.emit({ event, type: ContextmenuType.header, content: column });
+  onColumnContextmenu({event, column}: any): void {
+    this.tableContextmenu.emit({event, type: ContextmenuType.header, content: column});
   }
 
   /**
    * The body triggered a contextmenu event.
    */
-  onRowContextmenu({ event, row }: any): void {
-    this.tableContextmenu.emit({ event, type: ContextmenuType.body, content: row });
+  onRowContextmenu({event, row}: any): void {
+    this.tableContextmenu.emit({event, type: ContextmenuType.body, content: row});
   }
 
   /**
    * The header triggered a column resize event.
    */
-  onColumnResize({ column, newValue }: any): void {
+  onColumnResize({column, newValue}: any): void {
     /* Safari/iOS 10.2 workaround */
     if (column === undefined) {
       return;
@@ -995,7 +1003,7 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
 
     let idx: number;
     const cols = this._internalColumns.map((c, i) => {
-      c = { ...c };
+      c = {...c};
 
       if (c.$$id === column.$$id) {
         idx = i;
@@ -1021,9 +1029,9 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
   /**
    * The header triggered a column re-order event.
    */
-  onColumnReorder({ column, newValue, prevValue }: any): void {
+  onColumnReorder({column, newValue, prevValue}: any): void {
     const cols = this._internalColumns.map(c => {
-      return { ...c };
+      return {...c};
     });
 
     const prevCol = cols[newValue];
@@ -1051,7 +1059,7 @@ export class DatatableComponent implements OnInit, DoCheck, AfterViewInit {
       });
     }
 
-    const { sorts } = event;
+    const {sorts} = event;
 
     // this could be optimized better since it will resort
     // the rows again on the 'push' detection...
